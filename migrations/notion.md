@@ -526,8 +526,12 @@ def fix_notion_links(content: str, available_files: set) -> str:
 
     content = re.sub(pattern, replace_link, content)
 
-    # Fix Notion internal links (notion://...)
-    content = re.sub(r'\[([^\]]+)\]\(notion://[^)]+\)', r'\1', content)
+    # Fix Notion internal links (notion://...) - preserve with TODO for manual review
+    content = re.sub(
+        r'\[([^\]]+)\]\(notion://[^)]+\)',
+        r'[\1](<!-- TODO: restore notion:// link -->)',
+        content
+    )
 
     # Fix workspace links
     content = re.sub(

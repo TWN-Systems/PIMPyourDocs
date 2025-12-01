@@ -452,6 +452,8 @@ Related issue: [PROJ-123](https://jira.company.com/browse/PROJ-123)
 #!/bin/bash
 # migrate_confluence_space.sh - Full migration automation
 
+set -e
+
 EXPORT_DIR="$1"
 OUTPUT_DIR="$2"
 
@@ -460,29 +462,64 @@ if [ -z "$EXPORT_DIR" ] || [ -z "$OUTPUT_DIR" ]; then
     exit 1
 fi
 
+# Check required tools
+if ! command -v pandoc &> /dev/null; then
+    echo "ERROR: pandoc is required but not installed."
+    echo "Install with: apt-get install pandoc OR brew install pandoc"
+    exit 1
+fi
+
+if ! command -v python3 &> /dev/null; then
+    echo "ERROR: python3 is required but not installed."
+    exit 1
+fi
+
 mkdir -p "$OUTPUT_DIR/attachments"
 
 echo "Converting HTML files..."
-find "$EXPORT_DIR" -name "*.html" | while read html_file; do
+html_count=0
+find "$EXPORT_DIR" -name "*.html" -print0 | while IFS= read -r -d '' html_file; do
     filename=$(basename "$html_file" .html)
     output_file="$OUTPUT_DIR/$(echo "$filename" | tr '[:upper:]' '[:lower:]' | tr ' ' '-').md"
 
-    pandoc -f html -t markdown \
+    if pandoc -f html -t markdown \
         --wrap=none \
         --extract-media="$OUTPUT_DIR/attachments" \
-        "$html_file" -o "$output_file"
-
-    echo "Converted: $filename"
+        "$html_file" -o "$output_file"; then
+        echo "Converted: $filename"
+        ((html_count++)) || true
+    else
+        echo "WARNING: Failed to convert: $filename"
+    fi
 done
 
 echo "Copying attachments..."
-find "$EXPORT_DIR" -name "attachments" -type d -exec cp -r {}/* "$OUTPUT_DIR/attachments/" \; 2>/dev/null
+find "$EXPORT_DIR" -name "attachments" -type d -exec cp -r {}/* "$OUTPUT_DIR/attachments/" \; 2>/dev/null || true
 
-echo "Running cleanup..."
-python3 clean_confluence.py "$OUTPUT_DIR"/*.md
+# Find .md files safely and run cleanup scripts if any exist
+md_files=()
+while IFS= read -r -d '' file; do
+    md_files+=("$file")
+done < <(find "$OUTPUT_DIR" -maxdepth 1 -name "*.md" -print0)
+
+if [ ${#md_files[@]} -eq 0 ]; then
+    echo "WARNING: No markdown files generated. Check your export directory."
+    exit 0
+fi
+
+echo "Running cleanup on ${#md_files[@]} files..."
+if [ -f "clean_confluence.py" ]; then
+    python3 clean_confluence.py "${md_files[@]}"
+else
+    echo "NOTE: clean_confluence.py not found, skipping cleanup"
+fi
 
 echo "Fixing links..."
-python3 fix_links.py "$OUTPUT_DIR"/*.md
+if [ -f "fix_links.py" ]; then
+    python3 fix_links.py "${md_files[@]}"
+else
+    echo "NOTE: fix_links.py not found, skipping link fixes"
+fi
 
 echo "Migration complete! Review files in $OUTPUT_DIR"
 ```

@@ -200,9 +200,31 @@ def to_kebab(s: str) -> str:
     return re.sub(r'[^a-z0-9]+', '-', s.lower()).strip('-')
 
 def html_to_markdown(html: str) -> str:
-    """Basic HTML to Markdown conversion."""
+    """
+    Convert HTML to Markdown.
+
+    For production use, prefer a robust library:
+        pip install markdownify
+        from markdownify import markdownify as md
+        return md(html)
+
+    Or use html2text:
+        pip install html2text
+        import html2text
+        h = html2text.HTML2Text()
+        return h.handle(html)
+
+    This basic regex implementation handles simple cases but may fail on:
+    - Nested tags (e.g., <strong><em>text</em></strong>)
+    - HTML entities (&nbsp;, &lt;, etc.)
+    - Malformed HTML
+    """
     if not html:
         return ""
+
+    # For robust conversion, uncomment:
+    # from markdownify import markdownify as md
+    # return md(html)
 
     text = html
     text = re.sub(r'<h1[^>]*>(.*?)</h1>', r'# \1\n', text, flags=re.DOTALL)

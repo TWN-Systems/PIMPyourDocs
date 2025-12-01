@@ -170,6 +170,26 @@ def to_kebab(s: str) -> str:
         return "unnamed"
     return re.sub(r'[^a-z0-9]+', '-', s.lower()).strip('-')
 
+def yaml_safe_string(s: str) -> str:
+    """
+    Escape a string for safe YAML serialization.
+
+    Prevents YAML injection by properly quoting strings that contain
+    special characters like colons, quotes, leading dashes, etc.
+
+    For production use, prefer using yaml.safe_dump():
+        import yaml
+        return yaml.safe_dump(s, default_flow_style=True).strip()
+    """
+    if not s:
+        return '""'
+    s = str(s)
+    # Escape backslashes and double quotes
+    s = s.replace('\\', '\\\\').replace('"', '\\"')
+    # Always quote to prevent injection via special YAML characters
+    # (colons, #, |, >, @, -, *, &, !, %, etc.)
+    return f'"{s}"'
+
 def html_to_markdown(html: str) -> str:
     """Basic HTML to Markdown conversion."""
     if not html:
@@ -205,9 +225,10 @@ def export_customer(exporter: AteraExporter, customer: dict, output_dir: Path):
     # Get custom fields
     custom_fields = exporter.get_custom_fields(customer_id)
 
-    # Create customer overview
+    # Create customer overview with safe YAML
+    safe_name = yaml_safe_string(customer_name)
     overview = f"""---
-title: "{customer_name}"
+title: {safe_name}
 status: published
 owner: msp-team
 created: {date.today().isoformat()}
@@ -280,15 +301,19 @@ def export_agent(exporter: AteraExporter, agent: dict, output_dir: Path):
     except Exception:
         details = agent
 
+    # Use safe YAML serialization
+    safe_name = yaml_safe_string(machine_name)
+    safe_os_type = yaml_safe_string(agent.get('OSType', 'Unknown'))
+
     content = f"""---
-title: "{machine_name}"
+title: {safe_name}
 status: published
 owner: msp-team
 created: {date.today().isoformat()}
 updated: {date.today().isoformat()}
 tags: [device, {to_kebab(agent.get('OSType', 'unknown'))}]
 atera_id: {agent_id}
-os_type: "{agent.get('OSType', 'Unknown')}"
+os_type: {safe_os_type}
 ---
 
 # {machine_name}
@@ -344,15 +369,19 @@ def export_knowledge_base(exporter: AteraExporter, output_dir: Path):
         title = article.get("Title", f"Article-{article_id}")
         category = article.get("Category", "General")
 
+        # Use safe YAML serialization
+        safe_title = yaml_safe_string(title)
+        safe_category = yaml_safe_string(category)
+
         content = f"""---
-title: "{title}"
+title: {safe_title}
 status: published
 owner: msp-team
 created: {date.today().isoformat()}
 updated: {date.today().isoformat()}
 tags: [knowledge-base, {to_kebab(category)}]
 atera_id: {article_id}
-category: "{category}"
+category: {safe_category}
 ---
 
 # {title}

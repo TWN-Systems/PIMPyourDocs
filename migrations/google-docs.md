@@ -387,6 +387,11 @@ if __name__ == "__main__":
     process_document(sys.argv[1], sys.argv[2])
 ```
 
+> **Post-processing tip**: Images renamed with MD5 hashes (e.g., `image-a1b2c3d4.png`)
+> provide stable names but limited readability. After export, manually review and
+> rename critical images with descriptive names (e.g., `architecture-diagram.png`,
+> `login-flow.png`) for better documentation maintainability.
+
 ## Step 4: Convert Tables
 
 Google Docs tables often export poorly. Options:
