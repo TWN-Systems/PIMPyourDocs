@@ -7,6 +7,7 @@ owner: "{TEAM_NAME}"
 created: {YYYY-MM-DD}
 updated: {YYYY-MM-DD}
 tags: [runbook, operations, {service}]
+ste: procedural
 ---
 
 ## Quick Reference

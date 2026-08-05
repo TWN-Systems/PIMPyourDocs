@@ -8,6 +8,7 @@ created: {YYYY-MM-DD}
 updated: {YYYY-MM-DD}
 tags: [incident, {severity}, {service}]
 incident_id: INC-{NUMBER}
+ste: procedural
 ---
 
 ## Summary

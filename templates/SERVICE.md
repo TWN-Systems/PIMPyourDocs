@@ -8,6 +8,7 @@ created: {YYYY-MM-DD}
 updated: {YYYY-MM-DD}
 tags: [service, {domain}]
 repo: https://github.com/org/repo
+ste: descriptive
 ---
 
 ## Overview

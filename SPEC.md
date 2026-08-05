@@ -454,4 +454,85 @@ Before publishing, every document should pass:
 
 ---
 
+## 11. Language & Writing Standards (ASD-STE100)
+
+Every document in this repo is written in **ASD-STE100 Simplified Technical English**
+(Issue 9, 2025-01-15) — the controlled language aerospace uses so a tired reader cannot
+misread an instruction. STE is a near-perfect negative of AI writing tell: long sentences,
+synonym rotation, hedges, and filler. This section is the standard, paraphrased for software
+docs; the official standard is a free download at asd-ste100.org.
+
+### 11.1 Classify Each Document
+
+Every document is either **procedural** (tells the reader what to do) or **descriptive**
+(explains what a thing is). The classification drives the sentence limit.
+
+| Template | Classification |
+|---|---|
+| RUNBOOK, INCIDENT | procedural |
+| ADR, SERVICE, API | descriptive |
+
+Do not mix the two in one passage. A note inside a procedure is descriptive.
+
+### 11.2 The Rules
+
+**Sentences (5.1, 6.3):** maximum **20 words** per sentence in procedural text, **25** in
+descriptive. Code spans, identifiers, numbers with units, and quoted text count as ONE word
+(rule 8.6). No sentence over the limit, ever.
+
+**Verbs (3.1–3.7):** simple tenses only — no present perfect ("has been updated" → "we
+updated"), no "-ing" verb clauses after a comma ("..., making it easy to..."). Active voice.
+One instruction per sentence (5.2). A required condition comes BEFORE its command (5.4):
+"If the build fails, read the log" — never "...read the log if the build fails".
+
+**Modals (3.7):** approved: **can, will, must**. Banned: **should, would, may, might, could**.
+- "should" as a requirement → "must"; as a suggestion → delete it or state it as fact.
+- "may/might/could" (possibility) → "can".
+- Exception: uppercase RFC 2119 keywords in requirement lists are legal terms of art.
+  The prose around them obeys STE.
+
+**Punctuation (8.1, 4.2, GR-6):** no semicolons — write two sentences. No contractions
+("don't" → "do not"). No Latin abbreviations: "e.g." → "for example", "i.e." → "that is",
+"etc." → name the items.
+
+**Vocabulary (1.1–1.14):** one word, one meaning, one part of speech. Collapse rotations:
+
+| Pick one | Instead of |
+|---|---|
+| check | verify / confirm / validate / ensure |
+| configuration | settings / options |
+| delete | remove / drop / destroy |
+| error | issue / problem / failure |
+
+**Slop words (banned):** leverage, utilize, seamlessly, effortlessly, robust, comprehensive,
+performant, facilitate, streamline, delve, plethora, myriad, crucial, pivotal, and "it is
+worth noting that". Delete them or give the measurable fact.
+
+**Untouchables (1.5, 8.6):** code, identifiers, CLI commands, flags, file paths, quoted
+error messages, and product names are exact — even when they break vocabulary rules.
+
+### 11.3 The Self-Check (MUST pass before publishing)
+
+Documentation is testable (section 2.3). Run the checker before every publish:
+
+```
+stefold lint --type <procedural|descriptive> <file>
+```
+
+The four manual checks, when the checker is unavailable:
+
+1. Count words in the three longest sentences. Over 20/25 → split.
+2. Search for: `'ll` `'re` `'s` contractions, `has been` / `have been`, `should`,
+   `-ing` verbs after a comma, semicolons.
+3. Every `if` and `when` stands at the START of its sentence, before the command.
+4. Search for the verbs you did not pick in your consistency pass. Replace every hit.
+
+`stefold score` adds the prose metric: countlm bits/word. STE text is low-surprisal;
+a rising score is a style-drift warning, not a verdict.
+
+`stefold` is a streaming single-pass linter on the fold substrate (hashtrinity rule
+tables, countlm scoring, autofold trace). It ships with the skill's self-test fixtures.
+
+---
+
 *This specification is itself a PIMPyourDocs document.*

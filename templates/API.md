@@ -9,6 +9,7 @@ updated: {YYYY-MM-DD}
 tags: [api, {service}]
 version: "1.0.0"
 base_url: https://api.example.com/v1
+ste: descriptive
 ---
 
 ## Overview

@@ -9,6 +9,7 @@ updated: {YYYY-MM-DD}
 tags: [architecture, {domain}]
 supersedes: ADR-{N}  # if applicable
 superseded_by: ADR-{N}  # if applicable
+ste: descriptive
 ---
 
 ## Status
