@@ -343,6 +343,122 @@ See [templates/API.md](./templates/API.md)
 
 See [templates/INCIDENT.md](./templates/INCIDENT.md)
 
+### 6.6 Open Decision Practices
+
+Use open decision practices when a decision affects people outside the core team, changes shared work, or has a lasting effect. Examples include a new policy, a change to a service, a major tool choice, or a project that changes how people work.
+
+The practices help people understand the decision and take part in it. They do not mean that every record must be public. The team must consider privacy, safety, legal duties, security, and commercial limits before it shares information. The team must name the decision owner and explain who can give input, who will decide, and when the decision will be made.
+
+#### 6.6.1 Core concepts
+
+The Open Organization describes five connected concepts. Use them together. A team can adapt the practices to its purpose and context.
+
+| Concept | What it means for documents and decisions |
+|---|---|
+| Transparency | Show the problem, goals, process, status, evidence, options, and reasons for the decision. State what is restricted and why when possible. |
+| Inclusivity | Identify affected people. Invite views from people who are not in the core team, including people who may disagree or who are often left out. Make the way to take part clear. |
+| Adaptability | Share work before it is final when safe. Ask for feedback at useful points. Record what changed after review and revise the plan when evidence changes. |
+| Collaboration | Involve people in framing the problem and goals, as well as in reviewing options and solutions. Make it easy for others to find and build on shared work. |
+| Community | State the shared purpose, values, and participation rules. Help new participants understand how the group works and how they can contribute. |
+
+#### 6.6.2 Open leadership in practice
+
+Open leadership is a set of actions. Any participant can use these actions. A formal title is not required. People who lead a decision or project should:
+
+- Publish or share useful context before asking for a decision.
+- Explain who owns the decision and who can affect it.
+- Ask whose views are missing and invite those people when practical.
+- Ask for feedback before the work is final. State what kind of feedback is useful and when it is due.
+- Explain which feedback changed the work. Explain why the team did not use other feedback when that reason matters.
+- Make it safe to raise risks, errors, and disagreement.
+- Share their own limits and uncertainties. Update the record when facts change.
+- Set a time or condition for review after the decision takes effect.
+
+These actions do not remove accountability. The decision owner remains responsible for the decision and its effects. Participation gives people a chance to inform the decision. It does not promise that every request will be accepted.
+
+#### 6.6.3 Common fact base
+
+For a significant decision or project, use a common fact base: a shared record that gives current and future participants the same useful context. Keep the opening section short. Link to detailed research and supporting records instead of repeating them.
+
+Add the sections that fit the decision:
+
+| Section | Record |
+|---|---|
+| Decision or project | Name, owner, status, date, and next review point |
+| Problem | The problem in plain words, the people affected, and related problems that are out of scope |
+| Goals | The intended result and how the team will know if it worked |
+| People and roles | Affected groups, decision owner, sponsor, contributors, reviewers, and ways to contact or join them |
+| Plan and timeline | Phases, dates, milestones, current status, and links to the detailed plan |
+| Options | Options under review, the proposed option, and options the team set aside with reasons |
+| Requirements and constraints | The needs the solution must meet and the limits that shape the decision |
+| Assumptions and risks | What the team believes but has not confirmed, known risks, possible harms, and likely effects |
+| Decision criteria | The factors used to compare options and their relative importance |
+| Evidence and feedback | Research, data, tests, feedback received, changes made, and feedback not adopted with reasons |
+| Decision and review | The decision, rationale, unresolved concerns, success measures, and conditions for reconsidering it |
+| Participation | How people can comment, ask questions, join a review, or give feedback after launch |
+
+The record is a working document. Start it when the team frames the problem. Add research and options as they emerge. Update status during planning and delivery. At launch, explain the decision, show how input shaped it, and state how people can report new effects. After launch, record results and decide whether the team must revisit the decision.
+
+#### 6.6.4 Work in phases
+
+The Open Decision Framework groups useful actions into four phases. Use the phases that fit the work. A small decision can use a short record. A decision with broad impact can need more time and more review.
+
+| Phase | Document and decision work |
+|---|---|
+| Concept, define, and ideate | Share the problem and possible approaches. State what is in scope and out of scope. Identify affected people, risks, constraints, and missing views. Invite ideas before selecting a solution. |
+| Plan and research | Gather input and evidence. Publish the plan, roles, dates, decision process, and criteria. State what feedback the team needs. Record assumptions and difficult trade-offs. |
+| Design, develop, and test | Share drafts or prototypes when safe. Ask people to test the work and identify risks. Record the feedback and show how it changed the design. Explain why the team did not make other changes. |
+| Launch, deploy, and close | Explain the decision and how the team reached it. Share success measures, known limits, and ways to give feedback. Set a review date or condition. Save lessons and results where future teams can find them. |
+
+At each phase, the team should ask:
+
+- Who can be affected by this work?
+- Who has not had a chance to contribute?
+- What facts, limits, and trade-offs do people need to understand?
+- What information cannot be shared? Who can review it safely?
+- What feedback is needed now? Who will read it and respond?
+- What result would cause the team to change course or revisit the decision?
+
+#### 6.6.5 Access, privacy, and safety
+
+Default to useful access for the people who need the record. Do not publish sensitive details only to appear open. Before sharing, check for personal data, security details, confidential terms, safety risks, and legal limits.
+
+When some details must stay restricted:
+
+- Keep a shareable summary when one can be made safely.
+- Mark the restricted section and state the reason at a level that does not expose the protected detail.
+- Name who can access the full record and how affected people can ask questions.
+- Keep the decision rationale and impact visible when it is safe to do so.
+- Review the access limit when the risk or context changes.
+
+Do not create two conflicting accounts of the decision. If the team maintains a public summary and a restricted record, link them where access permits and keep the facts consistent.
+
+#### 6.6.6 Maturity as a discussion aid
+
+The Open Decision Framework maturity model describes three levels: **Foundational**, **Established**, and **Transformative**. The levels describe different practices. They do not certify an organization or prove that a decision is good.
+
+| Area | Foundational practice | Established practice | Transformative practice |
+|---|---|---|---|
+| Communication | Sponsors and selected stakeholders receive updates. Detailed material is available on request. | Stakeholders receive regular updates. The team shares a common fact base with controlled access. | The team shares regular, clear updates and an open fact base when safe. It keeps useful details available for people who want them. |
+| Transparency | The team explains some information and may share it late. It respects privacy. | The team shares detail before a decision when risk is low or trust is strong. It explains why access is limited. | The team looks for safe ways to share more. It discusses limits, mistakes, and rationale during the work. |
+| Early release | The team shows a preview or tests with a small group before launch. | The team shares drafts or prototypes and uses feedback to improve them. | The team plans feedback points, makes it safe to raise concerns, and explains how feedback shaped the work. |
+| Collaboration | The team welcomes new participants but may depend on a small group. Roles can be unclear. | The team seeks new views, defines roles, and works to remove barriers. | The team makes roles and expectations visible. It supports broad participation and helps contributors work across group boundaries. |
+| Decision-making | The team identifies decision makers and expects leaders to support the work. | The team uses clear roles and includes relevant stakeholders. | The person closest to the work can lead the decision. Leaders give context and support, and avoid unnecessary control. |
+
+Use the model to discuss current practice and choose a useful next step. A team can be at different levels in different areas. Do not combine the areas into one score unless the team defines and explains that method. Do not require the highest level for every project. The right level depends on impact, risk, time, and the people affected.
+
+#### 6.6.7 Source material and reuse
+
+These references provide the definitions, framework, template, and maturity examples:
+
+- [Open Organization Definition](https://theopenorganization.org/definition/open-organization-definition/)
+- [Open Leadership Definition](https://theopenorganization.org/definition/open-leadership-definition/)
+- [Common Fact Base Template](https://github.com/open-organization/open-decision-framework/tree/master/common-fact-base-template)
+- [Open Decision Framework Maturity Model](https://github.com/open-organization/open-decision-framework/tree/master/maturity-model)
+- [Open Decision Framework community edition](https://github.com/open-organization/open-decision-framework/blob/master/ODF-community.md)
+
+The Open Decision Framework community edition and maturity model identify a [CC BY-SA 4.0 license](https://creativecommons.org/licenses/by-sa/4.0/). This section summarizes concepts in original wording and links to the sources. Check the license and attribution terms for each source before copying or adapting its material.
+
 ---
 
 ## 7. Automation Hooks
